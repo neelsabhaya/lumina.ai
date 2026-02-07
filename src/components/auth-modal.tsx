@@ -18,19 +18,26 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
     if (!isOpen) return null;
 
     const handleGoogleLogin = async () => {
+        // Safe window check for Next.js
+        const origin = typeof window !== 'undefined' ? window.location.origin : ''
+        
         await supabase.auth.signInWithOAuth({
             provider: 'google',
-            options: { redirectTo: window.location.origin }
+            options: { redirectTo: origin }
         })
     }
 
     const handleEmailLogin = async (e: React.FormEvent) => {
         e.preventDefault()
         setLoading(true)
+        
+        const origin = typeof window !== 'undefined' ? window.location.origin : ''
+
         const { error } = await supabase.auth.signInWithOtp({
             email,
-            options: { emailRedirectTo: window.location.origin }
+            options: { emailRedirectTo: origin }
         })
+        
         if (error) {
             alert(error.message)
         } else {
@@ -41,7 +48,8 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
     }
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/40 backdrop-blur-md animate-in fade-in duration-300">
+        // FIX: Changed z-[100] to standard z-50 for better compatibility
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/40 backdrop-blur-md animate-in fade-in duration-300">
             <div className="relative w-full max-w-md p-8 bg-card/60 backdrop-blur-3xl border border-border rounded-[2.5rem] shadow-2xl space-y-6">
                 <Button
                     variant="ghost"

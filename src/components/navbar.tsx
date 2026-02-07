@@ -6,13 +6,14 @@ import { supabase } from "@/lib/supabase"
 import { Button } from "@/components/ui/button"
 import { LogOut, Menu, Info } from "lucide-react"
 import { type User } from "@supabase/supabase-js"
-import { ModeToggle } from "./mode-toggle" // FIX: Import the functional toggle
+import { ModeToggle } from "./mode-toggle"
 
 interface NavbarProps {
   onToggleSidebar: () => void;
+  onSignInClick?: () => void; // ADD THIS PROP
 }
 
-export function Navbar({ onToggleSidebar }: NavbarProps) {
+export function Navbar({ onToggleSidebar, onSignInClick }: NavbarProps) {
   const [user, setUser] = React.useState<User | null>(null)
 
   React.useEffect(() => {
@@ -45,7 +46,6 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
       </div>
 
       <div className="flex items-center gap-4">
-        {/* ADDED: Functional Theme Toggle */}
         <ModeToggle />
 
         {user ? (
@@ -59,7 +59,11 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
             </Button>
           </div>
         ) : (
-          <Button variant="outline" className="rounded-full border-emerald-500/20 text-emerald-500 font-bold px-6">
+          <Button 
+            onClick={onSignInClick} // TRIGGER THE MODAL
+            variant="outline" 
+            className="rounded-full border-emerald-500/20 text-emerald-500 font-bold px-6"
+          >
             Sign In
           </Button>
         )}

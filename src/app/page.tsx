@@ -95,7 +95,6 @@ export default function Home() {
     if (window.innerWidth < 768) setIsSidebarOpen(false);
   };
 
-  // NEW: Delete Functionality
   const deleteProject = async (e: React.MouseEvent, id: string) => {
     e.stopPropagation(); 
     const { error } = await supabase.from('prompts').delete().eq('id', id);
@@ -229,7 +228,11 @@ export default function Home() {
       </aside>
 
       <main className="flex-1 flex flex-col relative h-full overflow-hidden no-scrollbar">
-        <Navbar onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
+        {/* UPDATED: Navbar now correctly triggers the Auth Modal */}
+        <Navbar 
+          onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} 
+          onSignInClick={() => setIsAuthModalOpen(true)}
+        />
 
         <div className="flex-1 container max-w-220 mx-auto flex flex-col relative z-10 h-full no-scrollbar">
           
