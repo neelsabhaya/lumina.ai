@@ -8,7 +8,7 @@
 
 * **⚡ Real-time Grading**: Instant quality scoring (0-100) and context analysis using the **Groq SDK**.
 * **📊 Confidence Radar**: A dynamic UI visualization that tracks prompt maturity based on structural constraints and technical detail.
-* **🛡️ Secure Proxy Layer**: Implements the latest **Next.js 16 `proxy.ts**` convention to protect AI API routes via **Supabase SSR**.
+* **🛡️ Secure Proxy Layer**: Implements the latest **Next.js 16 proxy.ts** convention to protect AI API routes via **Supabase SSR**.
 * **🧠 Context-Aware Feedback**: An AI architect that asks specific questions to refine missing context before generating final outputs.
 
 ---
